@@ -1,6 +1,6 @@
-# MYTemplate
+# MYNumbers
 
-A basic C++23 project template using CMake and Ninja.
+Number classification library.
 
 ## Requirements
 
@@ -26,7 +26,7 @@ cmake --build --preset debug-clang
 Run the program:
 
 ```bash
-./build/debug-clang/MYTemplate
+./build/debug-clang/MYNumbers
 ```
 
 Available configurations include:

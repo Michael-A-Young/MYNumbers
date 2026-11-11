@@ -1,9 +1,9 @@
 cmake_minimum_required(VERSION 3.25)
 
 project(
-	MYTemplate
+	MYNumbers
 	VERSION 0.1.0
-	DESCRIPTION "Project template"
+	DESCRIPTION "Number classification library"
 	LANGUAGES CXX
 )
 
@@ -59,12 +59,12 @@ include(StaticAnalysis)
 # ---------------------------------------------------------------------------
 
 add_executable(
-	MYTemplate
+	MYNumbers
 	src/main.cpp
 )
 
 target_include_directories(
-	MYTemplate
+	MYNumbers
 	PRIVATE
     ${CMAKE_CURRENT_SOURCE_DIR}/include
 )
@@ -73,10 +73,10 @@ target_include_directories(
 # Project configuration
 # ---------------------------------------------------------------------------
 
-target_compile_features(MYTemplate PRIVATE cxx_std_23)
+target_compile_features(MYNumbers PRIVATE cxx_std_23)
 
 set_target_properties(
-	MYTemplate
+	MYNumbers
 	PROPERTIES
     CXX_EXTENSIONS OFF
 )
@@ -85,6 +85,6 @@ set_target_properties(
 # Warnings / sanitizers / static analysis
 # ---------------------------------------------------------------------------
 
-MY_configure_warnings(MYTemplate)
-MY_configure_sanitisers(MYTemplate)
-MY_configure_static_analysis(MYTemplate)
+MY_configure_warnings(MYNumbers)
+MY_configure_sanitisers(MYNumbers)
+MY_configure_static_analysis(MYNumbers)

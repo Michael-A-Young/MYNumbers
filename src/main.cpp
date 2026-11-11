@@ -5,7 +5,7 @@
 	Main function template.
 */
 
-// MYTemplate
+// MYNumbers
 #include "main.h"
 
 // Standard Library
