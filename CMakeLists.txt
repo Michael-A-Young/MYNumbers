@@ -55,12 +55,57 @@ include(Sanitisers)
 include(StaticAnalysis)
 
 # ---------------------------------------------------------------------------
+# Library
+# ---------------------------------------------------------------------------
+
+add_library(
+	MYNumbersLib
+	STATIC
+	src/Math.cpp
+	src/BuiltInNumbers.cpp
+	src/NumberCache.cpp
+	src/NumberClassifier.cpp
+	src/NumberCondition.cpp
+	src/NumberQuery.cpp
+	src/NumberRelationship.cpp
+	src/NumberRelationshipRegistry.cpp
+	src/NumberSequence.cpp
+	src/NumberSequenceRegistry.cpp
+	src/NumberType.cpp
+	src/NumberTypeRegistry.cpp
+)
+
+target_include_directories(
+	MYNumbersLib
+	PUBLIC
+	${CMAKE_CURRENT_SOURCE_DIR}/include
+)
+
+target_compile_features(MYNumbersLib PUBLIC cxx_std_23)
+
+set_target_properties(
+	MYNumbersLib
+	PROPERTIES
+	CXX_EXTENSIONS OFF
+)
+
+MY_configure_warnings(MYNumbersLib)
+MY_configure_sanitisers(MYNumbersLib)
+MY_configure_static_analysis(MYNumbersLib)
+
+# ---------------------------------------------------------------------------
 # Source
 # ---------------------------------------------------------------------------
 
 add_executable(
 	MYNumbers
 	src/main.cpp
+)
+
+target_link_libraries(
+	MYNumbers
+	PRIVATE
+	MYNumbersLib
 )
 
 target_include_directories(
