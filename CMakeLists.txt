@@ -61,7 +61,7 @@ include(StaticAnalysis)
 add_library(
 	MYNumbersLib
 	STATIC
-	src/Math.cpp
+	src/Maths.cpp
 	src/BuiltInNumbers.cpp
 	src/NumberCache.cpp
 	src/NumberClassifier.cpp
