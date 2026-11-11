@@ -1,3 +1,10 @@
+/**
+@file
+	NumberClassifier.cpp
+@brief
+	Orchestrator and public interface to the number classification framework.
+*/
+
 #include "NumberClassifier.h"
 
 namespace MY

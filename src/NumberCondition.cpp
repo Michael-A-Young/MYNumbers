@@ -1,3 +1,10 @@
+/**
+@file
+	NumberCondition.cpp
+@brief
+	A composable condition over a single number.
+*/
+
 #include "NumberCondition.h"
 
 namespace MY

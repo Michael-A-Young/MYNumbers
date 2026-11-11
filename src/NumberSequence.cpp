@@ -1,3 +1,10 @@
+/**
+@file
+	NumberSequence.cpp
+@brief
+	Interface for number types that form an ordered sequence.
+*/
+
 #include "NumberSequence.h"
 
 namespace MY
