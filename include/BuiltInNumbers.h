@@ -40,6 +40,11 @@ public:
 	void RegisterRelationships(TypeRegistry<NumberRelationship>* registry);
 
 private:
+	static std::vector<std::unique_ptr<NumberType>> GetTypes();
+	static std::vector<std::unique_ptr<NumberSequence>> GetSequences();
+	static std::vector<std::unique_ptr<NumberRelationship>> GetRelationships();
+
+private:
 	std::vector<std::unique_ptr<NumberType>> mTypes;
 	std::vector<std::unique_ptr<NumberSequence>> mSequences;
 	std::vector<std::unique_ptr<NumberRelationship>> mRelationships;
