@@ -11,15 +11,13 @@
 // MYNumbers
 #include "BuiltInNumbers.h"
 #include "NumberCache.h"
+#include "TypeRegistry.h"
 #include "NumberRelationship.h"
-#include "NumberRelationshipRegistry.h"
 #include "NumberRelationshipType.h"
 #include "NumberSequence.h"
-#include "NumberSequenceRegistry.h"
 #include "NumberSequenceType.h"
 #include "NumberType.h"
 #include "NumberTypeID.h"
-#include "NumberTypeRegistry.h"
 
 // Standard Library
 #include <map>
@@ -50,7 +48,7 @@ public:
 	const NumberCache& GetCache() const;
 
 	NumberTypeID RegisterType(NumberType& type);
-	bool RegisterType(NumberType& type, NumberTypeID id);
+	bool RegisterType(NumberType& type, NumberTypeID typeID);
 
 	NumberSequenceType RegisterSequence(NumberSequence& sequence);
 	bool RegisterSequence(NumberSequence& sequence, NumberSequenceType type);
@@ -59,7 +57,7 @@ public:
 	bool RegisterRelationship(NumberRelationship& relationship, NumberRelationshipType type);
 
 	NumberClassification GetTypes(Number value) const;
-	bool IsType(Number value, NumberTypeID id) const;
+	bool IsType(Number value, NumberTypeID typeID) const;
 
 	void Search(const NumberQuery& query, Numbers& outNumbers) const;
 
@@ -74,9 +72,9 @@ private:
 private:
 	NumberCache mCache;
 	BuiltInNumbers mBuiltIns;
-	NumberTypeRegistry mTypeRegistry;
-	NumberSequenceRegistry mSequenceRegistry;
-	NumberRelationshipRegistry mRelationshipRegistry;
+	TypeRegistry<NumberType> mTypeRegistry;
+	TypeRegistry<NumberSequence> mSequenceRegistry;
+	TypeRegistry<NumberRelationship> mRelationshipRegistry;
 };
 
 } // namespace MY

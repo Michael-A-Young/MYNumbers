@@ -24,7 +24,7 @@ class NumberClassifier;
 class NumberCondition
 {
 public:
-	static NumberCondition Type(NumberTypeID id);
+	static NumberCondition Type(NumberTypeID typeID);
 	static NumberCondition RelatesTo(NumberRelationshipType type, Number operand);
 	static NumberCondition RelatesFrom(NumberRelationshipType type, Number operand);
 

@@ -9,12 +9,10 @@
 #define MY_BUILT_IN_NUMBERS_H
 
 // MYNumbers
+#include "TypeRegistry.h"
 #include "NumberRelationship.h"
-#include "NumberRelationshipRegistry.h"
 #include "NumberSequence.h"
-#include "NumberSequenceRegistry.h"
 #include "NumberType.h"
-#include "NumberTypeRegistry.h"
 
 // Standard Library
 #include <memory>
@@ -37,9 +35,9 @@ public:
 	~BuiltInNumbers() = default;
 
 public:
-	void RegisterTypes(NumberTypeRegistry* registry);
-	void RegisterSequences(NumberSequenceRegistry* registry);
-	void RegisterRelationships(NumberRelationshipRegistry* registry);
+	void RegisterTypes(TypeRegistry<NumberType>* registry);
+	void RegisterSequences(TypeRegistry<NumberSequence>* registry);
+	void RegisterRelationships(TypeRegistry<NumberRelationship>* registry);
 
 private:
 	std::vector<std::unique_ptr<NumberType>> mTypes;

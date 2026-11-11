@@ -68,11 +68,8 @@ add_library(
 	src/NumberCondition.cpp
 	src/NumberQuery.cpp
 	src/NumberRelationship.cpp
-	src/NumberRelationshipRegistry.cpp
 	src/NumberSequence.cpp
-	src/NumberSequenceRegistry.cpp
 	src/NumberType.cpp
-	src/NumberTypeRegistry.cpp
 )
 
 target_include_directories(

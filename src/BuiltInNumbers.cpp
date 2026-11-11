@@ -10,15 +10,15 @@ BuiltInNumbers::BuiltInNumbers()
 {
 }
 
-void BuiltInNumbers::RegisterTypes(NumberTypeRegistry* /* registry */)
+void BuiltInNumbers::RegisterTypes(TypeRegistry<NumberType>* /* registry */)
 {
 }
 
-void BuiltInNumbers::RegisterSequences(NumberSequenceRegistry* /* registry */)
+void BuiltInNumbers::RegisterSequences(TypeRegistry<NumberSequence>* /* registry */)
 {
 }
 
-void BuiltInNumbers::RegisterRelationships(NumberRelationshipRegistry* /* registry */)
+void BuiltInNumbers::RegisterRelationships(TypeRegistry<NumberRelationship>* /* registry */)
 {
 }
 
