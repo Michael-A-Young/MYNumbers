@@ -1,0 +1,323 @@
+{
+    "version": 6,
+
+    "cmakeMinimumRequired": {
+        "major": 3,
+        "minor": 25,
+        "patch": 0
+    },
+
+    "configurePresets": [
+        {
+            "name": "base",
+            "hidden": true,
+            "generator": "Ninja",
+            "cacheVariables": {
+                "CMAKE_CXX_STANDARD": "23",
+                "CMAKE_CXX_STANDARD_REQUIRED": "ON",
+                "CMAKE_CXX_EXTENSIONS": "OFF",
+                "CMAKE_EXPORT_COMPILE_COMMANDS": "ON",
+                "MY_WARNINGS_AS_ERRORS": "ON"
+            }
+        },
+
+        {
+            "name": "gcc",
+            "hidden": true,
+            "inherits": "base",
+            "toolchainFile": "${sourceDir}/cmake/toolchains/gcc.cmake"
+        },
+
+        {
+            "name": "clang",
+            "hidden": true,
+            "inherits": "base",
+            "toolchainFile": "${sourceDir}/cmake/toolchains/clang.cmake"
+        },
+
+        {
+            "name": "debug",
+            "hidden": true,
+            "inherits": "base",
+            "cacheVariables": {
+                "CMAKE_BUILD_TYPE": "Debug"
+            }
+        },
+
+        {
+            "name": "release",
+            "hidden": true,
+            "inherits": "base",
+            "cacheVariables": {
+                "CMAKE_BUILD_TYPE": "Release"
+            }
+        },
+
+        {
+            "name": "asan",
+            "hidden": true,
+            "inherits": "debug",
+            "cacheVariables": {
+                "MY_ENABLE_ASAN": "ON"
+            }
+        },
+
+        {
+            "name": "ubsan",
+            "hidden": true,
+            "inherits": "debug",
+            "cacheVariables": {
+                "MY_ENABLE_UBSAN": "ON"
+            }
+        },
+
+        {
+            "name": "tsan",
+            "hidden": true,
+            "inherits": "debug",
+            "cacheVariables": {
+                "MY_ENABLE_TSAN": "ON"
+            }
+        },
+
+        {
+            "name": "tidy",
+            "hidden": true,
+            "inherits": "debug",
+            "cacheVariables": {
+                "MY_ENABLE_CLANG_TIDY": "ON"
+            }
+        },
+
+        {
+            "name": "debug-gcc",
+            "displayName": "Debug - GCC",
+            "inherits": [
+                "gcc",
+                "debug"
+            ],
+            "binaryDir": "${sourceDir}/build/debug-gcc"
+        },
+
+        {
+            "name": "debug-clang",
+            "displayName": "Debug - Clang",
+            "inherits": [
+                "clang",
+                "debug"
+            ],
+            "binaryDir": "${sourceDir}/build/debug-clang"
+        },
+
+        {
+            "name": "release-gcc",
+            "displayName": "Release - GCC",
+            "inherits": [
+                "gcc",
+                "release"
+            ],
+            "binaryDir": "${sourceDir}/build/release-gcc"
+        },
+
+        {
+            "name": "release-clang",
+            "displayName": "Release - Clang",
+            "inherits": [
+                "clang",
+                "release"
+            ],
+            "binaryDir": "${sourceDir}/build/release-clang"
+        },
+
+        {
+            "name": "asan-gcc",
+            "displayName": "ASan - GCC",
+            "inherits": [
+                "gcc",
+                "asan"
+            ],
+            "binaryDir": "${sourceDir}/build/asan-gcc"
+        },
+
+        {
+            "name": "asan-clang",
+            "displayName": "ASan - Clang",
+            "inherits": [
+                "clang",
+                "asan"
+            ],
+            "binaryDir": "${sourceDir}/build/asan-clang"
+        },
+
+        {
+            "name": "ubsan-gcc",
+            "displayName": "UBSan - GCC",
+            "inherits": [
+                "gcc",
+                "ubsan"
+            ],
+            "binaryDir": "${sourceDir}/build/ubsan-gcc"
+        },
+
+        {
+            "name": "ubsan-clang",
+            "displayName": "UBSan - Clang",
+            "inherits": [
+                "clang",
+                "ubsan"
+            ],
+            "binaryDir": "${sourceDir}/build/ubsan-clang"
+        },
+
+        {
+            "name": "tsan-gcc",
+            "displayName": "TSan - GCC",
+            "inherits": [
+                "gcc",
+                "tsan"
+            ],
+            "binaryDir": "${sourceDir}/build/tsan-gcc"
+        },
+
+        {
+            "name": "tsan-clang",
+            "displayName": "TSan - Clang",
+            "inherits": [
+                "clang",
+                "tsan"
+            ],
+            "binaryDir": "${sourceDir}/build/tsan-clang"
+        },
+
+        {
+            "name": "asan-ubsan-gcc",
+            "displayName": "ASan + UBSan - GCC",
+            "inherits": [
+                "gcc",
+                "asan",
+                "ubsan"
+            ],
+            "binaryDir": "${sourceDir}/build/asan-ubsan-gcc"
+        },
+
+        {
+            "name": "asan-ubsan-clang",
+            "displayName": "ASan + UBSan - Clang",
+            "inherits": [
+                "clang",
+                "asan",
+                "ubsan"
+            ],
+            "binaryDir": "${sourceDir}/build/asan-ubsan-clang"
+        },
+
+        {
+            "name": "tsan-ubsan-gcc",
+            "displayName": "TSan + UBSan - GCC",
+            "inherits": [
+                "gcc",
+                "tsan",
+                "ubsan"
+            ],
+            "binaryDir": "${sourceDir}/build/tsan-ubsan-gcc"
+        },
+
+        {
+            "name": "tsan-ubsan-clang",
+            "displayName": "TSan + UBSan - Clang",
+            "inherits": [
+                "clang",
+                "tsan",
+                "ubsan"
+            ],
+            "binaryDir": "${sourceDir}/build/tsan-ubsan-clang"
+        },
+
+        {
+            "name": "clang-tidy",
+            "inherits": [
+                "clang",
+                "tidy"
+            ],
+            "binaryDir": "${sourceDir}/build/tidy-clang"
+        }
+    ],
+
+    "buildPresets": [
+        {
+            "name": "debug-gcc",
+            "configurePreset": "debug-gcc"
+        },
+
+        {
+            "name": "debug-clang",
+            "configurePreset": "debug-clang"
+        },
+
+        {
+            "name": "release-gcc",
+            "configurePreset": "release-gcc"
+        },
+
+        {
+            "name": "release-clang",
+            "configurePreset": "release-clang"
+        },
+
+        {
+            "name": "asan-gcc",
+            "configurePreset": "asan-gcc"
+        },
+
+        {
+            "name": "asan-clang",
+            "configurePreset": "asan-clang"
+        },
+
+        {
+            "name": "ubsan-gcc",
+            "configurePreset": "ubsan-gcc"
+        },
+
+        {
+            "name": "ubsan-clang",
+            "configurePreset": "ubsan-clang"
+        },
+
+        {
+            "name": "tsan-gcc",
+            "configurePreset": "tsan-gcc"
+        },
+
+        {
+            "name": "tsan-clang",
+            "configurePreset": "tsan-clang"
+        },
+
+        {
+            "name": "asan-ubsan-gcc",
+            "configurePreset": "asan-ubsan-gcc"
+        },
+
+        {
+            "name": "asan-ubsan-clang",
+            "configurePreset": "asan-ubsan-clang"
+        },
+
+        {
+            "name": "tsan-ubsan-gcc",
+            "configurePreset": "tsan-ubsan-gcc"
+        },
+
+        {
+            "name": "tsan-ubsan-clang",
+            "configurePreset": "tsan-ubsan-clang"
+        },
+
+        {
+            "name": "clang-tidy",
+            "configurePreset": "clang-tidy"
+        }
+    ]
+}
+
