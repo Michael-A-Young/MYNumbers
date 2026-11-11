@@ -40,7 +40,6 @@ public:
 	bool IsPrime(Number value) const;
 
 	void Clear();
-	size_t NumNumbers() const;
 
 private:
 	mutable std::unordered_map<Number, Numbers> mPrimeDivisors;
