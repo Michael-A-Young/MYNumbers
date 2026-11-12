@@ -74,7 +74,7 @@ NumberClassification NumberClassifier::GetTypes(Number value) const
 
 		if (type != nullptr)
 		{
-			isMember = type->IsMember(value);
+			isMember = type->IsMember(value, mCache);
 		}
 
 		result.emplace(static_cast<NumberTypeID>(typeID), isMember);
@@ -90,7 +90,7 @@ bool NumberClassifier::IsType(Number value, NumberTypeID typeID) const
 
 	if (type != nullptr)
 	{
-		result = type->IsMember(value);
+		result = type->IsMember(value, mCache);
 	}
 
 	return result;

@@ -17,6 +17,8 @@
 namespace MY
 {
 
+class NumberCache;
+
 class NumberType
 {
 public:
@@ -32,7 +34,7 @@ public:
 
 public:
 	virtual std::string_view GetName() const = 0;
-	virtual bool IsMember(Number value) const = 0;
+	virtual bool IsMember(Number value, const NumberCache& cache) const = 0;
 
 };
 

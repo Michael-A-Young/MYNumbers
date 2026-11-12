@@ -67,7 +67,7 @@ private:
 	void RegisterBuiltInTypes();
 
 private:
-	[[maybe_unused]] NumberCache mCache;
+	NumberCache mCache;
 	BuiltInNumbers mBuiltIns;
 	TypeRegistry<NumberType> mTypeRegistry;
 	TypeRegistry<NumberSequence> mSequenceRegistry;
