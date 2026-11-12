@@ -5,8 +5,9 @@
 	Orchestrator and public interface to the number classification framework.
 */
 
-// MYNumbers
 #include "NumberClassifier.h"
+
+// MYNumbers
 #include "NumberQuery.h"
 
 // Standard Library
@@ -25,13 +26,6 @@ NumberClassifier::NumberClassifier()
 	, mRelationshipRegistry(static_cast<uint32_t>(NumberRelationshipType::FirstCustom))
 {
 	RegisterBuiltInTypes();
-}
-
-void NumberClassifier::RegisterBuiltInTypes()
-{
-	mBuiltIns.RegisterTypes(&mTypeRegistry);
-	mBuiltIns.RegisterSequences(&mSequenceRegistry);
-	mBuiltIns.RegisterRelationships(&mRelationshipRegistry);
 }
 
 NumberTypeID NumberClassifier::RegisterType(NumberType& type)
@@ -194,6 +188,13 @@ bool NumberClassifier::Holds(NumberRelationshipType type, Number left, Number ri
 	}
 
 	return result;
+}
+
+void NumberClassifier::RegisterBuiltInTypes()
+{
+	mBuiltIns.RegisterTypes(&mTypeRegistry);
+	mBuiltIns.RegisterSequences(&mSequenceRegistry);
+	mBuiltIns.RegisterRelationships(&mRelationshipRegistry);
 }
 
 } // namespace MY

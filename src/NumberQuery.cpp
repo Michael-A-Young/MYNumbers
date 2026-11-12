@@ -5,7 +5,6 @@
 	A set of conditions and ranges describing numbers of interest.
 */
 
-// MYNumbers
 #include "NumberQuery.h"
 
 // Standard Library
@@ -41,45 +40,6 @@ NumberQuery& NumberQuery::Range(Number first, Number last)
 	mRanges.push_back(NumberRange{first, last});
 	NormaliseRange();
 	return *this;
-}
-
-void NumberQuery::NormaliseRange()
-{
-	std::sort(mRanges.begin(), mRanges.end(), [](const NumberRange& left, const NumberRange& right)
-	{
-		return left.first < right.first;
-	});
-
-	NumberRanges normalisedRanges;
-	normalisedRanges.reserve(mRanges.size());
-
-	for (const NumberRange& range : mRanges)
-	{
-		if (normalisedRanges.empty())
-		{
-			normalisedRanges.push_back(range);
-		}
-		else
-		{
-			NumberRange& current = normalisedRanges.back();
-			const bool overlaps = range.first <= current.last;
-			const bool adjacent = current.last != std::numeric_limits<Number>::max() && range.first == current.last + 1;
-
-			if (overlaps || adjacent)
-			{
-				if (range.last > current.last)
-				{
-					current.last = range.last;
-				}
-			}
-			else
-			{
-				normalisedRanges.push_back(range);
-			}
-		}
-	}
-
-	mRanges.swap(normalisedRanges);
 }
 
 NumberQuery& NumberQuery::SetMaxResults(size_t maxResults)
@@ -135,6 +95,45 @@ std::optional<size_t> NumberQuery::GetMaxResults() const
 std::optional<std::chrono::milliseconds> NumberQuery::GetMaxTime() const
 {
 	return mMaxTime;
+}
+
+void NumberQuery::NormaliseRange()
+{
+	std::sort(mRanges.begin(), mRanges.end(), [](const NumberRange& left, const NumberRange& right)
+	{
+		return left.first < right.first;
+	});
+
+	NumberRanges normalisedRanges;
+	normalisedRanges.reserve(mRanges.size());
+
+	for (const NumberRange& range : mRanges)
+	{
+		if (normalisedRanges.empty())
+		{
+			normalisedRanges.push_back(range);
+		}
+		else
+		{
+			NumberRange& current = normalisedRanges.back();
+			const bool overlaps = range.first <= current.last;
+			const bool adjacent = current.last != std::numeric_limits<Number>::max() && range.first == current.last + 1;
+
+			if (overlaps || adjacent)
+			{
+				if (range.last > current.last)
+				{
+					current.last = range.last;
+				}
+			}
+			else
+			{
+				normalisedRanges.push_back(range);
+			}
+		}
+	}
+
+	mRanges.swap(normalisedRanges);
 }
 
 } // namespace MY

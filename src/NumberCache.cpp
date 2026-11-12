@@ -5,8 +5,9 @@
 	Caches per-number results shared between classifiers.
 */
 
-// MYNumbers
 #include "NumberCache.h"
+
+// MYNumbers
 #include "Maths.h"
 
 namespace MY

@@ -15,7 +15,9 @@
 
 // Standard Library
 #include <chrono>
+#include <cstddef>
 #include <optional>
+#include <vector>
 
 namespace MY
 {

@@ -5,7 +5,6 @@
 	Shared mathematical functions used by number classification.
 */
 
-// MYNumbers
 #include "Maths.h"
 
 // Standard Library
@@ -13,6 +12,16 @@
 
 namespace MY
 {
+
+void GetDivisors(Number value, Numbers& outDivisors)
+{
+	GetProperDivisors(value, outDivisors);
+
+	if (value != 0)
+	{
+		outDivisors.push_back(value);
+	}
+}
 
 void GetProperDivisors(Number value, Numbers& outProperDivisors)
 {
@@ -37,16 +46,6 @@ void GetProperDivisors(Number value, Numbers& outProperDivisors)
 		}
 
 		std::sort(outProperDivisors.begin(), outProperDivisors.end());
-	}
-}
-
-void GetDivisors(Number value, Numbers& outDivisors)
-{
-	GetProperDivisors(value, outDivisors);
-
-	if (value != 0)
-	{
-		outDivisors.push_back(value);
 	}
 }
 

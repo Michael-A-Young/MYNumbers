@@ -5,8 +5,9 @@
 	A composable condition over a single number.
 */
 
-// MYNumbers
 #include "NumberCondition.h"
+
+// MYNumbers
 #include "NumberClassifier.h"
 
 // Standard Library
@@ -14,15 +15,6 @@
 
 namespace MY
 {
-
-NumberCondition::NumberCondition(Kind kind)
-	: mKind(kind)
-	, mType(NumberTypeID::Invalid)
-	, mRelationshipType(NumberRelationshipType::Invalid)
-	, mOperand(0)
-	, mChildren()
-{
-}
 
 NumberCondition NumberCondition::Type(NumberTypeID typeID)
 {
@@ -130,6 +122,15 @@ bool NumberCondition::Matches(Number value, const NumberClassifier& classifier) 
 	}
 
 	return result;
+}
+
+NumberCondition::NumberCondition(Kind kind)
+	: mKind(kind)
+	, mType(NumberTypeID::Invalid)
+	, mRelationshipType(NumberRelationshipType::Invalid)
+	, mOperand(0)
+	, mChildren()
+{
 }
 
 } // namespace MY

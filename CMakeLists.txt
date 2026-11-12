@@ -108,7 +108,7 @@ target_link_libraries(
 target_include_directories(
 	MYNumbers
 	PRIVATE
-    ${CMAKE_CURRENT_SOURCE_DIR}/include
+	${CMAKE_CURRENT_SOURCE_DIR}/include
 )
 
 # ---------------------------------------------------------------------------
@@ -120,7 +120,7 @@ target_compile_features(MYNumbers PRIVATE cxx_std_23)
 set_target_properties(
 	MYNumbers
 	PROPERTIES
-    CXX_EXTENSIONS OFF
+	CXX_EXTENSIONS OFF
 )
 
 # ---------------------------------------------------------------------------
