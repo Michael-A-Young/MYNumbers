@@ -5,9 +5,13 @@
 	Orchestrator and public interface to the number classification framework.
 */
 
+// MYNumbers
 #include "NumberClassifier.h"
+#include "NumberQuery.h"
 
 // Standard Library
+#include <chrono>
+#include <limits>
 #include <vector>
 
 namespace MY
@@ -98,9 +102,59 @@ bool NumberClassifier::IsType(Number value, NumberTypeID typeID) const
 	return result;
 }
 
-void NumberClassifier::Search(const NumberQuery& /* query */, Numbers& outNumbers) const
+void NumberClassifier::Search(const NumberQuery& query, Numbers& outNumbers) const
 {
 	outNumbers.clear();
+
+	NumberRanges ranges = query.GetRanges();
+	const std::optional<size_t> maxResults = query.GetMaxResults();
+	const std::optional<std::chrono::milliseconds> maxTime = query.GetMaxTime();
+	const std::chrono::steady_clock::time_point startTime = std::chrono::steady_clock::now();
+	const bool limited = maxResults.has_value() || maxTime.has_value();
+
+	if (ranges.empty() && limited)
+	{
+		ranges.push_back(NumberRange{0, std::numeric_limits<Number>::max()});
+	}
+
+	bool done = maxResults.has_value() && maxResults.value() == 0;
+
+	for (const NumberRange& range : ranges)
+	{
+		Number value = range.first;
+
+		while (!done)
+		{
+			if (maxTime.has_value() && std::chrono::steady_clock::now() - startTime >= maxTime.value())
+			{
+				done = true;
+				break;
+			}
+
+			if (query.Matches(value))
+			{
+				outNumbers.push_back(value);
+
+				if (maxResults.has_value() && outNumbers.size() >= maxResults.value())
+				{
+					done = true;
+					break;
+				}
+			}
+
+			if (value == range.last)
+			{
+				break;
+			}
+
+			++value;
+		}
+
+		if (done)
+		{
+			break;
+		}
+	}
 }
 
 Number NumberClassifier::GetNth(NumberSequenceType type, Index index) const
