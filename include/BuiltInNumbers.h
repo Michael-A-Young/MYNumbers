@@ -11,12 +11,15 @@
 // MYNumbers
 #include "TypeRegistry.h"
 #include "NumberRelationship.h"
+#include "NumberRelationshipType.h"
 #include "NumberSequence.h"
+#include "NumberSequenceType.h"
 #include "NumberType.h"
+#include "NumberTypeID.h"
 
 // Standard Library
+#include <map>
 #include <memory>
-#include <vector>
 
 namespace MY
 {
@@ -40,14 +43,14 @@ public:
 	void RegisterRelationships(TypeRegistry<NumberRelationship>* registry);
 
 private:
-	static std::vector<std::unique_ptr<NumberType>> GetTypes();
-	static std::vector<std::unique_ptr<NumberSequence>> GetSequences();
-	static std::vector<std::unique_ptr<NumberRelationship>> GetRelationships();
+	static std::map<NumberTypeID, std::unique_ptr<NumberType>> GetTypes();
+	static std::map<NumberSequenceType, std::unique_ptr<NumberSequence>> GetSequences();
+	static std::map<NumberRelationshipType, std::unique_ptr<NumberRelationship>> GetRelationships();
 
 private:
-	std::vector<std::unique_ptr<NumberType>> mTypes;
-	std::vector<std::unique_ptr<NumberSequence>> mSequences;
-	std::vector<std::unique_ptr<NumberRelationship>> mRelationships;
+	std::map<NumberTypeID, std::unique_ptr<NumberType>> mTypes;
+	std::map<NumberSequenceType, std::unique_ptr<NumberSequence>> mSequences;
+	std::map<NumberRelationshipType, std::unique_ptr<NumberRelationship>> mRelationships;
 };
 
 } // namespace MY

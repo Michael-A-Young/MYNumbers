@@ -19,43 +19,43 @@ BuiltInNumbers::BuiltInNumbers()
 
 void BuiltInNumbers::RegisterTypes(TypeRegistry<NumberType>* registry)
 {
-	for (std::unique_ptr<NumberType>& type : mTypes)
+	for (const auto& entry : mTypes)
 	{
-		registry->Register(*type);
+		registry->Register(*entry.second, static_cast<uint32_t>(entry.first));
 	}
 }
 
 void BuiltInNumbers::RegisterSequences(TypeRegistry<NumberSequence>* registry)
 {
-	for (std::unique_ptr<NumberSequence>& sequence : mSequences)
+	for (const auto& entry : mSequences)
 	{
-		registry->Register(*sequence);
+		registry->Register(*entry.second, static_cast<uint32_t>(entry.first));
 	}
 }
 
 void BuiltInNumbers::RegisterRelationships(TypeRegistry<NumberRelationship>* registry)
 {
-	for (std::unique_ptr<NumberRelationship>& relationship : mRelationships)
+	for (const auto& entry : mRelationships)
 	{
-		registry->Register(*relationship);
+		registry->Register(*entry.second, static_cast<uint32_t>(entry.first));
 	}
 }
 
-std::vector<std::unique_ptr<NumberType>> BuiltInNumbers::GetTypes()
+std::map<NumberTypeID, std::unique_ptr<NumberType>> BuiltInNumbers::GetTypes()
 {
-	std::vector<std::unique_ptr<NumberType>> types;
+	std::map<NumberTypeID, std::unique_ptr<NumberType>> types;
 	return types;
 }
 
-std::vector<std::unique_ptr<NumberSequence>> BuiltInNumbers::GetSequences()
+std::map<NumberSequenceType, std::unique_ptr<NumberSequence>> BuiltInNumbers::GetSequences()
 {
-	std::vector<std::unique_ptr<NumberSequence>> sequences;
+	std::map<NumberSequenceType, std::unique_ptr<NumberSequence>> sequences;
 	return sequences;
 }
 
-std::vector<std::unique_ptr<NumberRelationship>> BuiltInNumbers::GetRelationships()
+std::map<NumberRelationshipType, std::unique_ptr<NumberRelationship>> BuiltInNumbers::GetRelationships()
 {
-	std::vector<std::unique_ptr<NumberRelationship>> relationships;
+	std::map<NumberRelationshipType, std::unique_ptr<NumberRelationship>> relationships;
 	return relationships;
 }
 
