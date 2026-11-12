@@ -185,7 +185,7 @@ bool NumberClassifier::Holds(NumberRelationshipType type, Number left, Number ri
 
 	if (relationship != nullptr)
 	{
-		result = relationship->Holds(left, right);
+		result = relationship->Holds(NumberContext(left, mCache), NumberContext(right, mCache));
 	}
 
 	return result;

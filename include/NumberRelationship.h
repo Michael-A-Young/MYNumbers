@@ -13,6 +13,7 @@
 
 // MYNumbers
 #include "Number.h"
+#include "NumberContext.h"
 
 // Standard Library
 #include <string_view>
@@ -35,7 +36,7 @@ public:
 
 public:
 	virtual std::string_view GetName() const = 0;
-	virtual bool Holds(Number left, Number right) const = 0;
+	virtual bool Holds(NumberContext left, NumberContext right) const = 0;
 
 };
 
