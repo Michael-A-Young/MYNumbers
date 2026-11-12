@@ -7,6 +7,9 @@
 
 #include "NumberClassifier.h"
 
+// Standard Library
+#include <vector>
+
 namespace MY
 {
 
@@ -25,6 +28,118 @@ void NumberClassifier::RegisterBuiltInTypes()
 	mBuiltIns.RegisterTypes(&mTypeRegistry);
 	mBuiltIns.RegisterSequences(&mSequenceRegistry);
 	mBuiltIns.RegisterRelationships(&mRelationshipRegistry);
+}
+
+NumberTypeID NumberClassifier::RegisterType(NumberType& type)
+{
+	const uint32_t typeID = mTypeRegistry.Register(type);
+	return static_cast<NumberTypeID>(typeID);
+}
+
+bool NumberClassifier::RegisterType(NumberType& type, NumberTypeID typeID)
+{
+	return mTypeRegistry.Register(type, static_cast<uint32_t>(typeID));
+}
+
+NumberSequenceType NumberClassifier::RegisterSequence(NumberSequence& sequence)
+{
+	const uint32_t sequenceType = mSequenceRegistry.Register(sequence);
+	return static_cast<NumberSequenceType>(sequenceType);
+}
+
+bool NumberClassifier::RegisterSequence(NumberSequence& sequence, NumberSequenceType type)
+{
+	return mSequenceRegistry.Register(sequence, static_cast<uint32_t>(type));
+}
+
+NumberRelationshipType NumberClassifier::RegisterRelationship(NumberRelationship& relationship)
+{
+	const uint32_t relationshipType = mRelationshipRegistry.Register(relationship);
+	return static_cast<NumberRelationshipType>(relationshipType);
+}
+
+bool NumberClassifier::RegisterRelationship(NumberRelationship& relationship, NumberRelationshipType type)
+{
+	return mRelationshipRegistry.Register(relationship, static_cast<uint32_t>(type));
+}
+
+NumberClassification NumberClassifier::GetTypes(Number value) const
+{
+	NumberClassification result;
+	std::vector<uint32_t> typeIDs;
+	mTypeRegistry.GetIDs(typeIDs);
+
+	for (const uint32_t typeID : typeIDs)
+	{
+		const NumberType* type = mTypeRegistry.Get(typeID);
+		bool isMember = false;
+
+		if (type != nullptr)
+		{
+			isMember = type->IsMember(value);
+		}
+
+		result.emplace(static_cast<NumberTypeID>(typeID), isMember);
+	}
+
+	return result;
+}
+
+bool NumberClassifier::IsType(Number value, NumberTypeID typeID) const
+{
+	bool result = false;
+	const NumberType* type = mTypeRegistry.Get(static_cast<uint32_t>(typeID));
+
+	if (type != nullptr)
+	{
+		result = type->IsMember(value);
+	}
+
+	return result;
+}
+
+void NumberClassifier::Search(const NumberQuery& /* query */, Numbers& outNumbers) const
+{
+	outNumbers.clear();
+}
+
+Number NumberClassifier::GetNth(NumberSequenceType type, Index index) const
+{
+	Number result = 0;
+	const NumberSequence* sequence = mSequenceRegistry.Get(static_cast<uint32_t>(type));
+
+	if (sequence != nullptr)
+	{
+		result = sequence->GetNth(index);
+	}
+
+	return result;
+}
+
+std::optional<Index> NumberClassifier::GetIndex(NumberSequenceType type, Number value) const
+{
+	std::optional<Index> result;
+	const NumberSequence* sequence = mSequenceRegistry.Get(static_cast<uint32_t>(type));
+
+	if (sequence != nullptr)
+	{
+		result = sequence->GetIndex(value);
+	}
+
+	return result;
+}
+
+bool NumberClassifier::Holds(NumberRelationshipType type, Number left, Number right) const
+{
+	bool result = false;
+	const NumberRelationship* relationship = mRelationshipRegistry.Get(static_cast<uint32_t>(type));
+
+	if (relationship != nullptr)
+	{
+		result = relationship->Holds(left, right);
+	}
+
+	return result;
 }
 
 } // namespace MY

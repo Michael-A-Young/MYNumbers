@@ -44,9 +44,6 @@ public:
 	~NumberClassifier() = default;
 
 public:
-	NumberCache& GetCache();
-	const NumberCache& GetCache() const;
-
 	NumberTypeID RegisterType(NumberType& type);
 	bool RegisterType(NumberType& type, NumberTypeID typeID);
 
@@ -70,7 +67,7 @@ private:
 	void RegisterBuiltInTypes();
 
 private:
-	NumberCache mCache;
+	[[maybe_unused]] NumberCache mCache;
 	BuiltInNumbers mBuiltIns;
 	TypeRegistry<NumberType> mTypeRegistry;
 	TypeRegistry<NumberSequence> mSequenceRegistry;

@@ -55,6 +55,9 @@ public:
 	std::optional<std::chrono::milliseconds> GetMaxTime() const;
 
 private:
+	void NormaliseRange();
+
+private:
 	const NumberClassifier* mClassifier;
 	std::vector<NumberCondition> mConditions;
 	NumberRanges mRanges;
