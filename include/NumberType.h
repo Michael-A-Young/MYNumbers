@@ -10,14 +10,13 @@
 
 // MYNumbers
 #include "Number.h"
+#include "NumberContext.h"
 
 // Standard Library
 #include <string_view>
 
 namespace MY
 {
-
-class NumberCache;
 
 class NumberType
 {
@@ -34,7 +33,7 @@ public:
 
 public:
 	virtual std::string_view GetName() const = 0;
-	virtual bool IsMember(Number value, const NumberCache& cache) const = 0;
+	virtual bool IsMember(NumberContext context) const = 0;
 
 };
 

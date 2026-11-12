@@ -8,6 +8,7 @@
 #include "NumberClassifier.h"
 
 // MYNumbers
+#include "NumberContext.h"
 #include "NumberQuery.h"
 
 // Standard Library
@@ -74,7 +75,7 @@ NumberClassification NumberClassifier::GetTypes(Number value) const
 
 		if (type != nullptr)
 		{
-			isMember = type->IsMember(value, mCache);
+			isMember = type->IsMember(NumberContext(value, mCache));
 		}
 
 		result.emplace(static_cast<NumberTypeID>(typeID), isMember);
@@ -90,7 +91,7 @@ bool NumberClassifier::IsType(Number value, NumberTypeID typeID) const
 
 	if (type != nullptr)
 	{
-		result = type->IsMember(value, mCache);
+		result = type->IsMember(NumberContext(value, mCache));
 	}
 
 	return result;

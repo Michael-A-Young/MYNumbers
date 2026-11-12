@@ -65,6 +65,7 @@ add_library(
 	src/BuiltInNumbers.cpp
 	src/NumberCache.cpp
 	src/NumberClassifier.cpp
+	src/NumberContext.cpp
 	src/NumberCondition.cpp
 	src/NumberQuery.cpp
 	src/NumberRelationship.cpp
